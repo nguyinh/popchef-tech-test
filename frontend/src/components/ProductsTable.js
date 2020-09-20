@@ -1,7 +1,13 @@
 import React from "react";
-import { Button, Table, Rating } from "semantic-ui-react";
+import { Button, Table, Rating, Label } from "semantic-ui-react";
+import COLORS from "../constants/colors";
+const capitalize = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 
 const ProductsTable = ({ products, productEdition, productRemove }) => {
+  let labelCategories = products.map(({ category }) => capitalize(category));
+  labelCategories = Array.from(new Set(labelCategories));
+  labelCategories = labelCategories.map((cat, i) => ({ label: cat, color: COLORS[i] ||' gray' }));
+
   return (
     <Table celled>
       <Table.Header>
@@ -17,7 +23,7 @@ const ProductsTable = ({ products, productEdition, productRemove }) => {
       <Table.Body>
         {products.map((product) => (
           <Table.Row key={product.id}>
-            <Table.Cell>{product.label}</Table.Cell>
+            <Table.Cell>{capitalize(product.label)}</Table.Cell>
             <Table.Cell>{`${product.price}€`}</Table.Cell>
             <Table.Cell>
               <Rating
@@ -26,7 +32,11 @@ const ProductsTable = ({ products, productEdition, productRemove }) => {
                 maxRating={5}
               />
             </Table.Cell>
-            <Table.Cell>{product.category}</Table.Cell>
+            <Table.Cell>
+              <Label color={labelCategories.find(cat => cat.label === capitalize(product.category)).color} horizontal>
+                {capitalize(product.category)}
+              </Label>
+            </Table.Cell>
             <Table.Cell>
               <Button onClick={() => productEdition(product)}>Modifier</Button>
               <Button onClick={() => productRemove(product.id)}>
