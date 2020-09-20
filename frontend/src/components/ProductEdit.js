@@ -26,8 +26,9 @@ const ProductEdit = ({ selected = {}, resetModal, submitProduct }) => {
           <Form.Field>
             <label>Prix</label>
             <input
-              placeholder=""
+              placeholder="€"
               defaultValue={price}
+              type='number'
               onChange={(e) => setPrice(e.target.value)}
             />
           </Form.Field>
@@ -35,8 +36,10 @@ const ProductEdit = ({ selected = {}, resetModal, submitProduct }) => {
           <Form.Field>
             <label>Note</label>
             <input
-              placeholder=""
+              placeholder="/10"
               defaultValue={rating}
+              type='number'
+              max={10}
               onChange={(e) => setRating(e.target.value)}
             />
           </Form.Field>
