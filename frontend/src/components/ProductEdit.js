@@ -9,7 +9,9 @@ const ProductEdit = ({ selected = {}, resetModal, submitProduct }) => {
 
   return (
     <Modal open>
-      <Modal.Header>Product edit</Modal.Header>
+      <Modal.Header>
+        {selected.id ? `Modification ${selected.label}` : `Ajout d'un plat`}
+      </Modal.Header>
       <Modal.Content>
         <Form>
           <Form.Field>
@@ -58,7 +60,9 @@ const ProductEdit = ({ selected = {}, resetModal, submitProduct }) => {
           content="Valider"
           labelPosition="right"
           icon="checkmark"
-          onClick={() => submitProduct({ id: selected.id, label, price, rating, category })}
+          onClick={() =>
+            submitProduct({ id: selected.id, label, price, rating, category })
+          }
           positive
         />
       </Modal.Actions>
