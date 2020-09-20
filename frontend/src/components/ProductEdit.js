@@ -118,3 +118,4 @@ const ProductEdit = ({ selected = {}, resetModal, submitProduct }) => {
 };
 
 export default ProductEdit;
+
