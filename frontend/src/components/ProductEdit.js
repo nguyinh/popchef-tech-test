@@ -6,6 +6,18 @@ const ProductEdit = ({ selected = {}, resetModal, submitProduct }) => {
   const [price, setPrice] = useState(selected.price || "");
   const [rating, setRating] = useState(selected.rating || "");
   const [category, setCategory] = useState(selected.category || "");
+  const [raiseErrors, setRaiseErrors] = useState(false);
+
+  const checkInputs = (product) => {
+    if (
+      product.label === "" ||
+      product.price === "" ||
+      product.rating === "" ||
+      product.category === ""
+    )
+      setRaiseErrors(true);
+    else submitProduct(product);
+  };
 
   return (
     <Modal open>
@@ -14,7 +26,15 @@ const ProductEdit = ({ selected = {}, resetModal, submitProduct }) => {
       </Modal.Header>
       <Modal.Content>
         <Form>
-          <Form.Field>
+          <Form.Field
+            error={
+              raiseErrors &&
+              label === "" && {
+                content: "Can't be blank",
+                pointing: "below",
+              }
+            }
+          >
             <label>Nom du plat</label>
             <input
               placeholder=""
@@ -23,28 +43,52 @@ const ProductEdit = ({ selected = {}, resetModal, submitProduct }) => {
             />
           </Form.Field>
 
-          <Form.Field>
+          <Form.Field
+            error={
+              raiseErrors &&
+              price === "" && {
+                content: "Can't be blank",
+                pointing: "below",
+              }
+            }
+          >
             <label>Prix</label>
             <input
               placeholder="€"
               defaultValue={price}
-              type='number'
+              type="number"
               onChange={(e) => setPrice(e.target.value)}
             />
           </Form.Field>
 
-          <Form.Field>
+          <Form.Field
+            error={
+              raiseErrors &&
+              rating === "" && {
+                content: "Can't be blank",
+                pointing: "below",
+              }
+            }
+          >
             <label>Note</label>
             <input
               placeholder="/10"
               defaultValue={rating}
-              type='number'
+              type="number"
               max={10}
               onChange={(e) => setRating(e.target.value)}
             />
           </Form.Field>
 
-          <Form.Field>
+          <Form.Field
+            error={
+              raiseErrors &&
+              category === "" && {
+                content: "Can't be blank",
+                pointing: "below",
+              }
+            }
+          >
             <label>Categorie</label>
             <input
               placeholder=""
@@ -64,7 +108,7 @@ const ProductEdit = ({ selected = {}, resetModal, submitProduct }) => {
           labelPosition="right"
           icon="checkmark"
           onClick={() =>
-            submitProduct({ id: selected.id, label, price, rating, category })
+            checkInputs({ id: selected.id, label, price, rating, category })
           }
           positive
         />
