@@ -6,7 +6,24 @@ axios.defaults.baseURL =
 export async function fetchProducts() {
   try {
     const result = await axios.get("/products");
-    console.log(result.data);
+
+    return result.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function addProduct(label, price, rating, category) {
+  try {
+    const result = await axios.post("/products", null, {
+      params: {
+        label,
+        price,
+        rating,
+        category,
+      },
+    });
+
     return result.data;
   } catch (err) {
     console.log(err);
