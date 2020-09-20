@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Table } from "semantic-ui-react";
 
-const ProductsTable = ({ products, productEdition }) => {
+const ProductsTable = ({ products, productEdition, productRemove }) => {
   return (
     <Table celled>
       <Table.Header>
@@ -23,7 +23,7 @@ const ProductsTable = ({ products, productEdition }) => {
             <Table.Cell>{product.category}</Table.Cell>
             <Table.Cell>
               <Button onClick={() => productEdition(product)}>Modifier</Button>
-              <Button>Supprimer</Button>
+              <Button onClick={() => productRemove(product.id)}>Supprimer</Button>
             </Table.Cell>
           </Table.Row>
         ))}

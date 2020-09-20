@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import "semantic-ui-css/semantic.min.css";
 import { Button, Dimmer, Loader, Segment } from "semantic-ui-react";
-import { fetchProducts, addProduct, updateProduct } from "./services";
+import {
+  fetchProducts,
+  addProduct,
+  updateProduct,
+  deleteProduct,
+} from "./services";
 import { ProductsTable, ProductEdit } from "./components";
 
 const App = () => {
@@ -18,6 +23,13 @@ const App = () => {
   const productEdition = (product) => {
     setSelected(product);
     setIsModalOpen(true);
+  };
+
+  const productRemove = async (id) => {
+    setIsLoading(true);
+    await deleteProduct(id);
+    setProducts(await fetchProducts());
+    setIsLoading(false);
   };
 
   const submitProduct = async (product) => {
@@ -63,7 +75,11 @@ const App = () => {
         </Dimmer>
 
         <Button onClick={productCreation}>Ajouter un plat</Button>
-        <ProductsTable products={products} productEdition={productEdition} />
+        <ProductsTable
+          products={products}
+          productEdition={productEdition}
+          productRemove={productRemove}
+        />
       </Segment>
 
       {isModalOpen && (
