@@ -18,7 +18,7 @@ const ProductsTable = ({ products, productEdition, productRemove }) => {
         {products.map((product) => (
           <Table.Row key={product.id}>
             <Table.Cell>{product.label}</Table.Cell>
-            <Table.Cell>{product.price}</Table.Cell>
+            <Table.Cell>{`${product.price}€`}</Table.Cell>
             <Table.Cell><Rating icon='star' defaultRating={product.rating/2} maxRating={5} /></Table.Cell>
             <Table.Cell>{product.category}</Table.Cell>
             <Table.Cell>
