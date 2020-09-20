@@ -10,6 +10,13 @@ exports.findAll = async () => {
   return result;
 };
 
+exports.add = async (label, price, rating, category) => {
+  const text = `INSERT INTO ${TABLE}(label, price, rating, category) VALUES ($1, $2, $3, $4) RETURNING *`;
+  const values = [label, price, rating, category];
+  const result = await client.query(text, values);
+  return result;
+};
+
 const init = async () => {
   try {
     await client.connect();
