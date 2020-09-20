@@ -1,5 +1,6 @@
 const { Client } = require("pg");
 const client = new Client();
+const { logger } = require("../middlewares");
 
 const TABLE = process.env.ENV === "dev" ? "popchef_test.products" : "TBD";
 
@@ -13,9 +14,9 @@ const init = async () => {
   try {
     await client.connect();
 
-    console.log("[Postgres] Connection success ✅");
+    logger.info("[POSTGRES] Connection success ✅");
   } catch (err) {
-    console.error("[Postgres] Connection failed ❌" + err);
+    logger.error("[Postgres] Connection failed ❌" + err);
   }
 };
 
