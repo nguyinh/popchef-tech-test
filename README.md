@@ -1,4 +1,4 @@
-# Documentation
+# Guide
 ## Clone repo
 Clone with `git clone https://github.com/nguyinh/popchef-tech-test`
 
@@ -31,3 +31,6 @@ PGPORT=your_postgres_post
 
 ## Postman
 A Postman collection is available at `Popchef.postman_collection.json`
+
+## Public URL
+Available [here](https://pc-tech-test-nguyinh.herokuapp.com/)
