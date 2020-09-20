@@ -1,13 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import "semantic-ui-css/semantic.min.css";
 import { fetchProducts } from "./services";
+import { ProductsTable } from "./components";
 
 const App = () => {
+  const [products, setProducts] = useState([]);
+
   useEffect(async () => {
-    await fetchProducts();
+    setProducts(await fetchProducts());
   }, []);
-  return <div className="App">hello</div>;
+
+  return (
+    <div className="App">
+      <ProductsTable products={products} />
+    </div>
+  );
 };
 
 export default App;
