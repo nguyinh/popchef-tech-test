@@ -1,7 +1,7 @@
 import React from "react";
-import { Icon, Label, Menu, Table } from "semantic-ui-react";
+import { Button, Table } from "semantic-ui-react";
 
-const ProductsTable = ({ products }) => {
+const ProductsTable = ({ products, productEdition }) => {
   return (
     <Table celled>
       <Table.Header>
@@ -10,6 +10,7 @@ const ProductsTable = ({ products }) => {
           <Table.HeaderCell>Prix</Table.HeaderCell>
           <Table.HeaderCell>Note</Table.HeaderCell>
           <Table.HeaderCell>Categorie</Table.HeaderCell>
+          <Table.HeaderCell>Actions</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
 
@@ -20,6 +21,10 @@ const ProductsTable = ({ products }) => {
             <Table.Cell>{product.price}</Table.Cell>
             <Table.Cell>{product.rating}</Table.Cell>
             <Table.Cell>{product.category}</Table.Cell>
+            <Table.Cell>
+              <Button onClick={() => productEdition(product)}>Modifier</Button>
+              <Button>Supprimer</Button>
+            </Table.Cell>
           </Table.Row>
         ))}
       </Table.Body>

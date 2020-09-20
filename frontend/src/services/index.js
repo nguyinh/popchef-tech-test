@@ -29,3 +29,21 @@ export async function addProduct(label, price, rating, category) {
     console.log(err);
   }
 }
+
+export async function updateProduct(id, label, price, rating, category) {
+  try {
+    const result = await axios.put("/products", null, {
+      params: {
+        id,
+        label,
+        price,
+        rating,
+        category,
+      },
+    });
+
+    return result.data;
+  } catch (err) {
+    console.log(err);
+  }
+}

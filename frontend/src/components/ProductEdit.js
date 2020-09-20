@@ -14,23 +14,36 @@ const ProductEdit = ({ selected = {}, resetModal, submitProduct }) => {
         <Form>
           <Form.Field>
             <label>Nom du plat</label>
-            <input placeholder="" onChange={(e) => setLabel(e.target.value)} />
+            <input
+              placeholder=""
+              defaultValue={label}
+              onChange={(e) => setLabel(e.target.value)}
+            />
           </Form.Field>
 
           <Form.Field>
             <label>Prix</label>
-            <input placeholder="" onChange={(e) => setPrice(e.target.value)} />
+            <input
+              placeholder=""
+              defaultValue={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
           </Form.Field>
 
           <Form.Field>
             <label>Note</label>
-            <input placeholder="" onChange={(e) => setRating(e.target.value)} />
+            <input
+              placeholder=""
+              defaultValue={rating}
+              onChange={(e) => setRating(e.target.value)}
+            />
           </Form.Field>
 
           <Form.Field>
             <label>Categorie</label>
             <input
               placeholder=""
+              defaultValue={category}
               onChange={(e) => setCategory(e.target.value)}
             />
           </Form.Field>
@@ -45,7 +58,7 @@ const ProductEdit = ({ selected = {}, resetModal, submitProduct }) => {
           content="Valider"
           labelPosition="right"
           icon="checkmark"
-          onClick={() => submitProduct({label, price, rating, category})}
+          onClick={() => submitProduct({ id: selected.id, label, price, rating, category })}
           positive
         />
       </Modal.Actions>

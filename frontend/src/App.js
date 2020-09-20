@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import "semantic-ui-css/semantic.min.css";
 import { Button, Dimmer, Loader, Segment } from "semantic-ui-react";
-import { fetchProducts, addProduct } from "./services";
+import { fetchProducts, addProduct, updateProduct } from "./services";
 import { ProductsTable, ProductEdit } from "./components";
 
 const App = () => {
   const [products, setProducts] = useState([]);
+  const [selected, setSelected] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -14,22 +15,38 @@ const App = () => {
     setIsModalOpen(true);
   };
 
+  const productEdition = (product) => {
+    setSelected(product);
+    setIsModalOpen(true);
+  };
+
   const submitProduct = async (product) => {
     setIsLoading(true);
     setIsModalOpen(false);
-    await addProduct(
-      product.label,
-      product.price,
-      product.rating,
-      product.category
-    );
+    if (product.id)
+      await updateProduct(
+        product.id,
+        product.label,
+        product.price,
+        product.rating,
+        product.category
+      );
+    else
+      await addProduct(
+        product.label,
+        product.price,
+        product.rating,
+        product.category
+      );
 
     setProducts(await fetchProducts());
     setIsLoading(false);
+    resetModal();
   };
 
   const resetModal = () => {
     setIsModalOpen(false);
+    setSelected({});
   };
 
   useEffect(async () => {
@@ -46,11 +63,15 @@ const App = () => {
         </Dimmer>
 
         <Button onClick={productCreation}>Ajouter un plat</Button>
-        <ProductsTable products={products} />
+        <ProductsTable products={products} productEdition={productEdition} />
       </Segment>
 
       {isModalOpen && (
-        <ProductEdit submitProduct={submitProduct} resetModal={resetModal} />
+        <ProductEdit
+          selected={selected}
+          submitProduct={submitProduct}
+          resetModal={resetModal}
+        />
       )}
     </div>
   );
