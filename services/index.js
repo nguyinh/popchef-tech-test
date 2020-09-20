@@ -24,6 +24,13 @@ exports.update = async (id, label, price, rating, category) => {
   return result;
 };
 
+exports.remove = async (id) => {
+    const text = `DELETE FROM ${TABLE} WHERE id=$1 RETURNING *`;
+    const values = [id];
+    const result = await client.query(text, values);
+    return result;
+  };
+
 const init = async () => {
   try {
     await client.connect();
