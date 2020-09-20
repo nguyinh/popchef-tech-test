@@ -21,6 +21,7 @@ exports.post = async (req, res, next) => {
 
   if (!label || !price || !rating || !category)
     return next(Boom.badRequest("Missing parameters"));
+    
   try {
     const result = await products.add(label, price, rating, category);
 
@@ -29,3 +30,21 @@ exports.post = async (req, res, next) => {
     return next(err);
   }
 };
+
+exports.put = async (req, res, next) => {
+    const { id, label, price, rating, category } = req.query;
+  
+    logger.info(`[PRODUCTS] put | ${id} ${label}, ${price}, ${rating}, ${category}`);
+  
+    if (!id || !label || !price || !rating || !category)
+      return next(Boom.badRequest("Missing parameters"));
+
+    try {
+      const result = await products.update(id, label, price, rating, category);
+  
+      return res.send(result.rows);
+    } catch (err) {
+      return next(err);
+    }
+  };
+  

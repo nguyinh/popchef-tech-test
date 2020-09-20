@@ -17,6 +17,13 @@ exports.add = async (label, price, rating, category) => {
   return result;
 };
 
+exports.update = async (id, label, price, rating, category) => {
+  const text = `UPDATE ${TABLE} SET label=$2, price=$3, rating=$4, category=$5 WHERE id=$1 RETURNING *`;
+  const values = [id, label, price, rating, category];
+  const result = await client.query(text, values);
+  return result;
+};
+
 const init = async () => {
   try {
     await client.connect();
