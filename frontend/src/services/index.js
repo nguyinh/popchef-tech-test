@@ -1,7 +1,7 @@
 import axios from "axios";
 
 axios.defaults.baseURL =
-  process.env.NODE_ENV === "development" ? "http://localhost:4000" : "TBD";
+  process.env.NODE_ENV === "development" ? "http://localhost:4000" : "https://pc-tech-test-nguyinh.herokuapp.com";
 
 export async function fetchProducts() {
   try {
