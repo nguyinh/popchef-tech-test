@@ -7,7 +7,7 @@ const ProductsTable = ({ products, productEdition, productRemove }) => {
   let labelCategories = products.map(({ category }) => capitalize(category));
   labelCategories = Array.from(new Set(labelCategories));
   labelCategories = labelCategories.map((cat, i) => ({ label: cat, color: COLORS[i] ||' gray' }));
-
+  
   return (
     <Table celled>
       <Table.Header>
@@ -28,7 +28,7 @@ const ProductsTable = ({ products, productEdition, productRemove }) => {
             <Table.Cell>
               <Rating
                 icon="star"
-                defaultRating={product.rating / 2}
+                rating={product.rating / 2}
                 maxRating={5}
               />
             </Table.Cell>
